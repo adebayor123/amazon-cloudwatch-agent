@@ -36,6 +36,6 @@ metric_declarations:
     label_matchers:
       - label_names:
           - Telemetry.Source
-        regex: '^RuntimeMetrics$'
+        regex: '^RuntimeMetric$'
     metric_name_selectors:
       - '^.*$'
