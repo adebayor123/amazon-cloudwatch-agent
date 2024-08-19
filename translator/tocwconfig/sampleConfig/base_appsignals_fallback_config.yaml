@@ -73,6 +73,15 @@ exporters:
                 - Latency
                 - Fault
                 - Error
+            - dimensions:
+                  - [ Environment, Service ]
+              label_matchers:
+                  - label_names:
+                        - Telemetry.Source
+                    regex: '^RuntimeMetric$'
+                    separator: ;
+              metric_name_selectors:
+                  - '^.*$'
         middleware: agenthealth/logs
         namespace: ApplicationSignals
         no_verify_ssl: false

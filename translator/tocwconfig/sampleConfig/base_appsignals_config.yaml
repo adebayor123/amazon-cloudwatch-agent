@@ -79,6 +79,7 @@ exporters:
                   - label_names:
                         - Telemetry.Source
                     regex: '^RuntimeMetric$'
+                    separator: ;
               metric_name_selectors:
                   - '^.*$'
         middleware: agenthealth/logs
