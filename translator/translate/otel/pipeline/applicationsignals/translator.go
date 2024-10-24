@@ -15,8 +15,8 @@ import (
 	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/exporter/debug"
 	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/extension/agenthealth"
 	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/extension/awsproxy"
-	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/processor/appsignalsmetricstransformprocessor"
 	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/processor/awsapplicationsignals"
+	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/processor/metricstransformprocessor"
 	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/processor/resourcedetection"
 	"github.com/aws/amazon-cloudwatch-agent/translator/translate/otel/receiver/otlp"
 )
@@ -54,7 +54,7 @@ func (t *translator) Translate(conf *confmap.Conf) (*common.ComponentTranslators
 	}
 
 	if t.dataType == component.DataTypeMetrics {
-		translators.Processors.Set(appsignalsmetricstransformprocessor.NewTranslator(appsignalsmetricstransformprocessor.WithDataType(t.dataType)))
+		translators.Processors.Set(metricstransformprocessor.NewTranslatorWithName(common.AppSignals))
 	}
 	translators.Processors.Set(resourcedetection.NewTranslator(resourcedetection.WithDataType(t.dataType)))
 	translators.Processors.Set(awsapplicationsignals.NewTranslator(awsapplicationsignals.WithDataType(t.dataType)))
